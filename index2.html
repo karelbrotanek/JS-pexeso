@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id = "cardsfield" style="font-size: 150px">
+<script>
+  let cards = ["😂", "😒", "🤔", "🙂", "😍", "😎", "🤩", "😃"];
+  cards = cards.concat(cards);// pripoji  za pole jeste jedno to same
+  for (let i = 0; i < cards.length; i++) {
+    let r = Math.floor(Math.random() * cards.length);// vygeneruje náhodné číslo od 0 - 15
+    let tmp = cards[i];
+    cards[i] = cards[r];
+    cards[r] = tmp;
+  }
+  let bestcards = "";
+  for (let i = 0; i < cards.length; i++) {
+    if (i > 0 && i % 4 == 0){
+      bestcards += "<br>";
+    }
+    bestcards  += cards[i];
+  }
+  //document.getElementById("cardsfield").innerText = bestcards;
+  document.write(bestcards);
+</script>
+</div>
+</body>
+</html>
