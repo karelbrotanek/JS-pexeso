@@ -7,6 +7,15 @@
 <body>
 <div id = "cardsfield" style="font-size: 150px">
 <script>
+  function sleep (ms){
+    const date = Date.now();
+    //document.write(date);
+    let cDate = null;
+    do{
+      cDate = Date.now();
+    }
+    while (cDate - date < ms);
+  }
   let cards = ["😂", "😒", "🤔", "🙂", "😍", "😎", "🤩", "😃"];
   cards = cards.concat(cards);// pripoji  za pole jeste jedno to same
   for (let i = 0; i < cards.length; i++) {
@@ -15,15 +24,48 @@
     cards[i] = cards[r];
     cards[r] = tmp;
   }
+  let fliped = 0;
+  let prvni = -1;
+  let druha = -1;
+  function flipcard (id){
+    if (fliped == 0){
+      document.getElementById(id).innerHTML = cards[id];
+      prvni = id;
+    }
+    if (fliped == 1) {
+      document.getElementById(id).innerHTML = cards[id];
+      druha = id;
+    }
+    fliped++;
+    document.getElementById(20).innerHTML = fliped;
+    if (fliped >= 3){
+      //sleep(1000);
+      //for (let i = 0; i < 16; i++) {
+        //document.getElementById(i).innerHTML = "🔲";
+      //}
+      document.getElementById(prvni).innerHTML = "🔲";
+      document.getElementById(druha).innerHTML = "🔲";
+      prvni = -1;
+      //druha = -1;
+      fliped = 0;
+    }
+    document.getElementById(20).innerHTML = fliped;
+    if (prvni < 0){
+      document.getElementById(druha).innerHTML = "🔲";
+    }
+  }
+  document.write("<div id='20'>" + fliped + "</div>");
   let bestcards = "";
   for (let i = 0; i < cards.length; i++) {
     if (i > 0 && i % 4 == 0){
       bestcards += "<br>";
+      document.write("<br>");
     }
-    bestcards  += cards[i];
+    bestcards  += "🔲";
+    document.write("<span id='"+i+"' onclick='flipcard("+i+")'>🔲</span>")
   }
   //document.getElementById("cardsfield").innerText = bestcards;
-  document.write(bestcards);
+  //document.write(bestcards);
 </script>
 </div>
 </body>
